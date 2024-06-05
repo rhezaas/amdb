@@ -6,13 +6,10 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.ResultMap;
 import org.apache.ibatis.annotations.Select;
 
-import io.quarkiverse.mybatis.runtime.meta.MapperDataSource;
-
 import amdb.domains.Movie;
 
 
 @Mapper
-@MapperDataSource("read")
 public interface Query {
 
     @Select("SELECT * FROM movie")
