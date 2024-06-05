@@ -123,7 +123,9 @@ public class Controller {
                 movie.getTitle(),
                 movie.getDirector(),
                 movie.getSummary(),
-                String.join(",", movie.getGenres().toString().replaceAll("[\\[\\] ]", ""))
+                (movie.getGenres() != null 
+                    ? String.join(",", movie.getGenres().toString().replaceAll("[\\[\\] ]", ""))
+                    : null)
             );
 
             resp.put("message", "Succeed");
