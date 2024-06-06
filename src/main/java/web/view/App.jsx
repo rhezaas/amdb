@@ -10,7 +10,8 @@ import "../view/styles/index.sass"
 const Movie = () => {
     const [movieContext, setContext] = useState({
         sidebarOpened: false,
-        movie: null
+        movie: null,
+        triggerRender: true,
     });
 
     return (

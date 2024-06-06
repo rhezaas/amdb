@@ -34,9 +34,10 @@ export default function Page({ page, title, className, children }) {
                 />
 
                 <button 
-                    className="fixed bg-neutral-100 bottom-5 right-5 p-5 rounded-full macro:hidden"
+                    className="fixed bg-neutral-100 bottom-5 right-5 p-5 rounded-full z-[99] macro:hidden"
                     onClick={() => {
                         setContext({
+                            ...movieContext,
                             sidebarOpened: true,
                             movie: {
                                 id: 0,

@@ -39,7 +39,7 @@ const useMovieAPI = () => {
 
 export default function Index() {
     const { movieContext, setContext } = useContext(MovieContext)
-    const { movies, loading, error, fetchMovie } = useMovieAPI()
+    const { movies, loading, fetchMovie } = useMovieAPI()
 
     useEffect(() => {
         if (!movies.length && loading) {
@@ -49,7 +49,7 @@ export default function Index() {
 
     useEffect(() => {
         fetchMovie()
-    }, [ movieContext ])
+    }, [ movieContext.triggerRender ])
 
     return (
         <Page title={"Awesome Movie Database"}>
@@ -77,9 +77,10 @@ export default function Index() {
                         </div>
                         
                         <button 
-                            className="p-5 flex items-center gap-3 self-end"
+                            className="p-5 items-center gap-3 self-end hidden macro:flex"
                             onClick={() => {
                                 setContext({
+                                    ...movieContext,
                                     sidebarOpened: true,
                                     movie: {
                                         id: 0,
@@ -102,7 +103,8 @@ export default function Index() {
 
                 <div className="grid gap-4 mini:grid-cols-2 macro:grid-cols-3">
                     {movies.map((movie, index) => (
-                        <button key={index} className="h-full relative bg-neutral-900 rounded-3xl" onClick={() => setContext({ sidebarOpened: true, movie })}>
+                        <div key={index} className="relative bg-neutral-900 rounded-3xl">
+                            <button className="absolute top-0 bottom-0 left-0 right-0 z-50" onClick={() => setContext({ ...movieContext, sidebarOpened: true, movie })}></button>
                             <div className="flex flex-col">
                                 <div className="flex items-center justify-center h-48 bg-neutral-700 rounded-3xl">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width={32} height={32} className="fill-neutral-100">
@@ -113,10 +115,12 @@ export default function Index() {
 
                                 <div className="px-5 py-4 text-left">
                                     <h2 className="font-semibold text-xl">{movie.title}</h2>
-                                    <p className="text-sm">{movie.director} • {movie.genres.join(", ")} • {movie.releaseYear}</p>
+                                    <p className="text-sm">{movie.director} • {movie.genres.map(genre => {
+                                        return genre.toLowerCase().replace(/(?:^|\s)\S/g, genre => { return genre.toUpperCase(); });
+                                    }).join(", ")}</p>
                                 </div>
                             </div>
-                        </button>
+                        </div>
                     ))}
                 </div>
             </div>
