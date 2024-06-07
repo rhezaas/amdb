@@ -10,13 +10,13 @@ public class Movie {
     public String title;
     public String director;
     public String summary;
-    public List<Genre> genres;
+    public List<String> genres;
 
     public Movie() {
         super();
     }
 
-    public Movie(int id, String title, String director, String summary, List<Genre> genres) {
+    public Movie(int id, String title, String director, String summary, List<String> genres) {
         this.id = id;
         this.title = title;
         this.director = director;
@@ -56,7 +56,7 @@ public class Movie {
         return this.summary;
     }
 
-    public void addGenre(Genre genre) {
+    public void addGenre(String genre) {
         this.genres.add(genre);
     }
 
@@ -64,7 +64,7 @@ public class Movie {
         this.genres.remove(index);
     }
 
-    public List<Genre> getGenres() {
+    public List<String> getGenres() {
         return this.genres;
     }
 

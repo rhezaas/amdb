@@ -8,7 +8,6 @@
         <result column="director" property="director" />
         <result column="summary" property="summary" />
         <result column="genres" property="genres" jdbcType="OTHER" 
-            javaType="amdb.domains.Genre" 
             typeHandler="amdb.utils.typeHandler.Genres" />
     </resultMap>
 </mapper>
